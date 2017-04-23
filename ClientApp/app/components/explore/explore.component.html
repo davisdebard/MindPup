@@ -1,0 +1,48 @@
+﻿<form onsubmit="" class="form-horizontal">
+  <!-- ============================================================ -->
+  <!-- HEADER                                                       -->
+  <!-- ============================================================ -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-12">
+        <h1><span class='glyphicon glyphicon-search'></span> Explore</h1>
+      </div>
+    </div>
+  </div>
+  <!-- end header panel -->
+  <!-- body -->
+  <div class="panel-body">
+    <!-- ============================================================ -->
+    <!-- LEARN selection                                              -->
+    <!-- ============================================================ -->
+    <div class="row">
+      <div class="col-sm-2">
+        <label>Learn about&nbsp;</label>
+      </div>
+      <div class="col-sm-10">
+        <input id="searchKey" focus name="searchKey" #searchKey type="text" (change)="onGameSearch()" />
+        <!--<input name="searchKey" #searchKey type="text" [(ngModel)]='searchKey' (change)="onGameSearch()" />-->
+        <button class="btn btn-success" (click)="onGameSearch()">
+          <span class="glyphicon glyphicon-arrow-right "></span>
+          &nbsp;Go
+        </button>
+       </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- RESULTS listing                                              -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="resultsFound == 1">
+      <div class="col-md-2">
+        <label>Result</label>
+      </div>
+      <div class="col-md-10">
+        <div *ngFor="let g of gameSet">
+          <a href="play" (click)="onGameSelect(g.GameId)">{{ g.GameName }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end panel-form-group -->
+</form>
+
+

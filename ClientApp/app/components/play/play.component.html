@@ -1,0 +1,347 @@
+﻿<!-- ============================================================ -->
+<!-- PLAY Header                                                  -->
+<!-- ============================================================ -->
+<div class="panel-heading well-sm">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Bell Icon -->
+      <span class='glyphicon glyphicon-th-large glyphicon-bell'></span>
+
+      <!-- Play heading -->
+      &nbsp;<span class="heading">Play</span>
+
+      <span *ngIf="cardStatus != 'Complete' && !(cardType == 'Multiple Choice'
+        && cardStatus == 'Play Question')">
+
+        <!-- GO Button -->
+        <button (click)="moveOn('button')"
+                class="btn btn-primary">
+          <span class="glyphicon glyphicon-play"></span>
+          &nbsp;Go
+        </button>
+      </span>
+      <!-- Start Over Button -->
+      <span *ngIf="cardStatus == 'Complete'">
+        <button (click)="onRestart()"
+                class="btn btn-info">
+          <span class="glyphicon glyphicon-refresh "></span>
+          &nbsp;Start Over
+        </button>
+      </span>
+
+      <!-- Trail Info -->
+      <span *ngIf="cardStatus != 'Complete'">
+        &nbsp;<label class="blue">Trail 2:&nbsp;{{sectionName}}</label>
+      </span>
+       <span *ngIf="cardStatus == 'Complete'">
+        &nbsp;<label class="blue">Hiked!</label>&nbsp;&nbsp;
+      </span>
+
+
+      <!-- Correct or Incorrect. -->
+      <span class="green" *ngIf="cardStatus == 'Seen Correct'">Correct!</span>
+      <span class="red" *ngIf="cardStatus == 'Seen Incorrect'">Incorrect.</span>
+
+      <!-- Score. -->
+      <span *ngIf="(cardStatus == 'Seen Correct' || cardStatus == 'Seen Incorrect') && phase == 'Play'">
+        &nbsp;{{Score}}%&nbsp;
+      </span>
+      <span *ngIf="(cardStatus == 'Seen Correct' || cardStatus == 'Seen Incorrect') && phase == 'Verify'">
+        &nbsp;{{ScoreVerify}}%&nbsp;
+      </span>
+
+      <!-- Reward Images. -->
+      <span id="Star" *ngIf="cardStatus == 'Seen Correct' && IsCorrect == 1 && phase == 'Play'">
+        <img src='/images/star.png' alt='Perfect' />
+      </span>
+      <span id="Check" *ngIf="cardStatus == 'Seen Correct' && IsPassed == 1 && IsCorrect == 0 && IsVerified == 0">
+        <img src='/images/check.png' alt='Passed' />
+      </span>
+      <span id="Check" *ngIf="cardStatus == 'Seen Correct' && IsVerified == 1">
+        <img src='/images/check-plus.png' alt='Verified' />
+      </span>
+
+      <!-- Awards -->
+      <span *ngIf="cardStatus == 'Complete' && award == '100'">
+        <label>&nbsp;Perfect!&nbsp;</label>
+        <img src='/images/award-100.png' alt='100' />
+      </span>
+      <span *ngIf="cardStatus == 'Complete' && award == '90'">
+        <label>&nbsp;Excellent!&nbsp;</label>
+        <img src='/images/award-90.png' alt='90' />
+      </span>
+      <span *ngIf="cardStatus == 'Complete' && award == '80'">
+        <label>&nbsp;Good Job!&nbsp;</label>
+        <img src='/images/award-80.png' alt='80' />
+      </span>
+
+      <!-- Boosts -->
+      <span *ngIf="cardStatus == 'Complete' && boost == '30'">
+        <label>&nbsp;Outstanding improvement!&nbsp;</label>
+        <img src='/images/boost-30.bmp' alt='30' />
+      </span>
+      <span *ngIf="cardStatus == 'Complete' && boost == '20'">
+        <label>&nbsp;Marked improvement!&nbsp;</label>
+        <img src='/images/boost-20.bmp' alt='20' />
+      </span>
+      <span *ngIf="cardStatus == 'Complete' && boost == '10'">
+        <label>&nbsp;Better!&nbsp;</label>
+        <img src='/images/boost-10.bmp' alt='10' />
+      </span>
+
+      <!-- Phase (except Play). -->
+      <span class="blue" *ngIf="IsReview == 1 && phase == 'Play'">
+        Review&nbsp;&nbsp;&nbsp;
+      </span>
+      <span class="blue" *ngIf="phase == 'Verify'">
+        Verify&nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
+    <!-- TO DO: Progress Bar. -->
+    <!--<div class="col-xs-6" >
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                  aria-valuemin="0" aria-valuemax="100" style="width:10%">
+          </div>
+        </div>-->
+  </div>
+</div>
+<!-- end panel -->
+<!-- ============================================================ -->
+<!-- IMAGES: Trail                                                -->
+<!-- ============================================================ -->
+<div class="row pad-left" *ngIf="cardStatus == 'Not Started' ||
+                                 cardStatus == 'Complete'">
+  <div class="col-md-12">
+    <img [src]="trailImage" />
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- POINT Name                                                   -->
+<!-- ============================================================ -->
+<div class="row pad-left" *ngIf="cardStatus == 'Intro Statement' ||
+                                 cardStatus == 'Review Statement'">
+  <div class="col-md-12">
+    <label><span id="PointName">{{PointName}}</span></label>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- STATEMENT                                                    -->
+<!-- ============================================================ -->
+<div class="row pad-left" *ngIf="cardStatus == 'Intro Statement'">
+  <div class="col-md-12">
+    <div id="statement-intro">
+      {{statementIntro}}
+    </div>
+  </div>
+</div>
+<div class="row pad-left" *ngIf="cardStatus == 'Review Statement'">
+  <div class="col-md-12">
+    <div id="statement-review">
+      {{statementReview}}
+    </div>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- QUESTION                                                     -->
+<!-- ============================================================ -->
+<div class="row pad-left" *ngIf="cardStatus == 'Play Question' ||
+                                 cardStatus == 'Seen Correct' ||
+                                 cardStatus == 'Seen Incorrect'">
+  <div class="col-md-12">
+    <label><span id="Question">{{question}}</span></label>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- ANSWER:  Fill In Answer Given                                -->
+<!-- ============================================================ -->
+<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
+                                        cardStatus == 'Seen Correct' ||
+                                        cardStatus == 'Seen Incorrect') &&
+                                        (cardType == 'Fill In' ||
+                                        cardType == 'Fill In Swappable')">
+  <div class="col-md-2">
+    <label for="AnswerGiven">Answer:</label>
+  </div>
+
+  <div class="col-md-10" *ngIf="cardType == 'Fill In' ||
+                                            cardType == 'Fill In Swappable'">
+    <input #answerGiven type="text" id="AnswerGiven" required maxlength="1000" size="40" />
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- ANSWER:  Multiple Choice: Row A                              -->
+<!-- ============================================================ -->
+<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
+                                         cardStatus == 'Seen Correct' ||
+                                         cardStatus == 'Seen Incorrect') &&
+                                         (cardType == 'Multiple Choice' ||
+                                          cardType == 'True False')">
+  <div class="col-md-12">
+    <div id="AnswerA" (click)="selectAnswer('A')"
+         [class.incorrect-answer]="answerLetter != 'A' &&
+                        answerGivenLetter == 'A' &&
+                        cardStatus == 'Seen Incorrect'"
+         [class.correct-answer]="answerLetter == 'A'"
+         [class.other-answer]="answerLetter != 'A' &&
+                        answerGivenLetter != 'A'"
+         [class.answer-given]="answerGivenLetter == 'A'
+                        && answerLetter != 'A'"
+         [class.answer-a]="cardStatus == 'Play Question'">
+      &nbsp;&nbsp;
+      <span *ngIf="cardType == 'Multiple Choice' || cardType == 'True False'">
+        {{answer}}
+      </span>
+    </div>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- ANSWER:  Multiple Choice: Row B                              -->
+<!-- ============================================================ -->
+<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
+                                         cardStatus == 'Seen Correct' ||
+                                         cardStatus == 'Seen Incorrect') &&
+                                         (cardType == 'Multiple Choice' ||
+                                          cardType == 'True False')">
+  <div class="col-md-12">
+    <div id="AnswerA" (click)="selectAnswer('B')"
+         [class.incorrect-answer]="answerLetter != 'B' &&
+                        answerGivenLetter == 'B' &&
+                        cardStatus == 'Seen Incorrect'"
+         [class.correct-answer]="answerLetter == 'B'"
+         [class.other-answer]="answerLetter != 'B' &&
+                        answerGivenLetter != 'B'"
+         [class.answer-given]="answerGivenLetter == 'B'
+                        && answerLetter != 'B'"
+         [class.answer-a]="cardStatus == 'Play Question'">
+      &nbsp;&nbsp;
+      <span *ngIf="cardType == 'Multiple Choice' || cardType == 'True False'">
+        {{answer}}
+      </span>
+    </div>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- ANSWER:  Multiple Choice: Row C                              -->
+<!-- ============================================================ -->
+<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
+                                         cardStatus == 'Seen Correct' ||
+                                         cardStatus == 'Seen Incorrect') &&
+                                         (cardType == 'Multiple Choice' ||
+                                          cardType == 'True False')">
+  <div class="col-md-12">
+    <div id="AnswerA" (click)="selectAnswer('C')"
+         [class.incorrect-answer]="answerLetter != 'C' &&
+                        answerGivenLetter == 'C' &&
+                        cardStatus == 'Seen Incorrect'"
+         [class.correct-answer]="answerLetter == 'C'"
+         [class.other-answer]="answerLetter != 'C' &&
+                        answerGivenLetter != 'C'"
+         [class.answer-given]="answerGivenLetter == 'C'
+                        && answerLetter != 'C'"
+         [class.answer-a]="cardStatus == 'Play Question'">
+      &nbsp;&nbsp;
+      <span *ngIf="cardType == 'Multiple Choice' || cardType == 'True False'">
+        {{answer}}
+      </span>
+    </div>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- ANSWER:  Multiple Choice: Row D                              -->
+<!-- ============================================================ -->
+<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
+                                         cardStatus == 'Seen Correct' ||
+                                         cardStatus == 'Seen Incorrect') &&
+                                         (cardType == 'Multiple Choice' ||
+                                          cardType == 'True False')">
+  <div class="col-md-12">
+    <div id="AnswerA" (click)="selectAnswer('D')"
+         [class.incorrect-answer]="answerLetter != 'D' &&
+                        answerGivenLetter == 'D' &&
+                        cardStatus == 'Seen Incorrect'"
+         [class.correct-answer]="answerLetter == 'D'"
+         [class.other-answer]="answerLetter != 'D' &&
+                        answerGivenLetter != 'D'"
+         [class.answer-given]="answerGivenLetter == 'D'
+                        && answerLetter != 'D'"
+         [class.answer-a]="cardStatus == 'Play Question'">
+      &nbsp;&nbsp;
+      <span *ngIf="cardType == 'Multiple Choice' || cardType == 'True False'">
+        {{answer}}
+      </span>
+    </div>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- ANSWER: Fill-In Correct Answer                               -->
+<!-- ============================================================ -->
+<div class="row pad-left" *ngIf="cardStatus == 'Seen Incorrect' &&
+                                (cardType == 'Fill In' ||
+                                 cardType == 'Fill In Swappable')">
+  <div class="col-md-2">
+    Correct answer:
+  </div>
+  <div class="col-md-10">
+    <span id="correctAnswer">
+      {{answer}}
+    </span>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- Spacer                                                       -->
+<!-- ============================================================ -->
+<div class="row row pad-left">
+  <div class="col-md-12">
+    &nbsp;
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                       -->
+<!-- ============================================================ -->
+<div id="footerWell" class="panel-default well">
+  <!-- ============================================================ -->
+  <!-- PROGRESS                                                     -->
+  <!-- ============================================================ -->
+  <!-- ============================================================ -->
+  <!-- DEBUGGING                                                    -->
+  <!-- ============================================================ -->
+  <div class="row row pad-left">
+    <div class="col-md-12">
+      <label><u>DEBUG Info</u>:&nbsp;&nbsp;</label>
+
+      <label for="cardStatus">Card Status:</label>
+      <span id="cardStatus">
+        &nbsp;{{cardStatus}}
+      </span>
+
+      <label for="trailImage">trailImage:</label>
+      <span id="trailImage">
+        &nbsp;{{trailImage}}
+      </span>
+
+      <label for="testInfo">Test Info:</label>
+      <span id="testInfo">
+        &nbsp;{{testInfo}}
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- TESTING: Card Type -->
+<!-- ============================================================ -->
+<!--<div class="row pad-left" *ngIf="cardStatus == 'Play Question' ||
+                                cardStatus == 'Seen Correct' ||
+                                cardStatus == 'Seen Incorrect'">
+    <div class="col-md-2">
+        <label for="CardType">Card&nbsp;Type:</label>
+    </div>
+    <div class="col-md-10">
+        <select type="number" name="selectCardType" [(ngModel)]="cardTypeNo" (ngModelChange)="onCardTypeChange()">
+            <option *ngFor="let t of cardTypes" [ngValue]="t.id">{{t.name}}</option>
+        </select>
+    </div>
+</div>  end row -->

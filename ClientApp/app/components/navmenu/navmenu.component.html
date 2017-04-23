@@ -1,0 +1,54 @@
+﻿<div class='main-nav'>
+  <div class='navbar navbar-inverse'>
+    <div class='navbar-header'>
+      <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+        <span class='sr-only'>Toggle navigation</span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+      </button>
+      <a class='navbar-brand' [routerLink]="['/home']"><span class="green">Mind</span><span class="red">Pup</span></a>
+    </div>
+    <div class='clearfix'></div>
+    <div class='navbar-collapse collapse'>
+      <ul class='nav navbar-nav'>
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/home']">
+            <span class='glyphicon glyphicon-home'></span> Home
+          </a>
+        </li>
+        <li [routerLinkActive]="['link-active']" *ngIf="isIntro == true">
+          <a [routerLink]="['/intro']">
+            <span class='glyphicon glyphicon-question-sign'></span> Intro
+          </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/explore']">
+            <span class='glyphicon glyphicon-search'></span> Explore
+          </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/play']">
+            <span class='glyphicon glyphicon-bell'></span> Play
+          </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/create']">
+            <span class='glyphicon glyphicon-education'></span> Create
+          </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/contact']">
+            <span class='glyphicon glyphicon-phone'></span> Contact
+          </a>
+        </li>
+        <!--<li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/testing']">
+            <span class='glyphicon glyphicon-asterisk'></span> Testing
+          </a>
+        </li>-->
+      </ul>
+    </div>
+  </div>
+</div>

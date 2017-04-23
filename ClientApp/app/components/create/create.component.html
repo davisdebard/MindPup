@@ -1,0 +1,313 @@
+﻿<form action="" class="form-horizontal">
+  <!-- ============================================================ -->
+  <!-- HEADER                                                       -->
+  <!-- ============================================================ -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-12">
+        <h1><span class='glyphicon glyphicon-education'></span> Create</h1>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <!-- ============================================================ -->
+    <!-- METHOD: Automatic vs. Manual vs. Professional                -->
+    <!-- ============================================================ -->
+    <div class="row ">
+      <div class="col-md-2">
+        <label>Method</label>
+      </div>
+      <div class="col-md-10">
+        <input type="radio" name="rdoMethod" value="Auto" checked
+               (change)="onMethodChange('Auto')" /> Auto &nbsp;
+        <input type="radio" name="rdoMethod" value="Manual"
+               (change)="onMethodChange('Manual')" /> Manual &nbsp;
+        <input type="radio" name="rdoMethod" value="Professional"
+               (change)="onMethodChange('Professional')" /> Professional &nbsp;
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- GAME: Automatic vs. Named                                    -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto')">
+      <div class="col-md-2">
+        <label>Game</label>
+      </div>
+      <div class="col-md-10">
+        <span *ngIf="(methodOption == 'Professional')">
+          <label>Name:</label>
+        </span>
+        <span *ngIf="(methodOption != 'Professional')">
+          <input type="radio" name="rdoGame" value="Auto" checked
+                 (change)="onGameOptionChange('Auto')" /> Auto &nbsp;
+          <input type="radio" name="rdoGame" value="Named"
+                 (change)="onGameOptionChange('Named')" /> {{ gameNameLabel }} &nbsp;
+        </span>
+        <span *ngIf="(gameOption == 'Named')">
+          <input type="text" name="gameName" required maxlength="1000" size="40"
+                 [(ngModel)]="gameName" />
+        </span>
+        <span *ngIf="(gameOption != 'Named')">
+          <label class="blue">{{ gameName }}</label>
+        </span>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- LEVEL 1: Automatic vs. Named                                 -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto')">
+      <div class="col-md-2">
+        <label>Level 1</label>
+      </div>
+      <div class="col-md-10">
+        <span *ngIf="(methodOption == 'Professional')">
+          <label>Name:</label>
+        </span>
+        <span *ngIf="(methodOption != 'Professional')">
+          <input type="radio" name="rdoLevel1" value="Auto" checked
+                 (change)="onLevel1Change('Auto')" /> Auto &nbsp;
+          <input type="radio" name="rdoLevel1" value="Named"
+                 (change)="onLevel1Change('Named')" /> {{ level1NameLabel }} &nbsp;
+        </span>
+        <span *ngIf="(level1Option == 'Named')">
+          <input type="text" name="level1Name" required maxlength="1000" size="40"
+                 [(ngModel)]="level1Name" />
+        </span>
+        <span *ngIf="(level1Option != 'Named')">
+          <label class="blue">{{ level1Name }}</label>
+        </span>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- LEVEL 2: Automatic vs. Named                                 -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto' && level1Option != 'Auto')">
+      <div class="col-md-2">
+        <label>Level 2</label>
+      </div>
+      <div class="col-md-10">
+        <input type="radio" name="rdoLevel2" value="Auto" checked
+               (change)="onLevel2Change('Auto')" /> Auto &nbsp;
+        <input type="radio" name="rdoLevel2" value="Named"
+               (change)="onLevel2Change('Named')" /> {{ level2NameLabel }} &nbsp;
+        <span *ngIf="(level2Option == 'Named')">
+          <input type="text" name="level2Name" required maxlength="1000" size="40"
+                 [(ngModel)]="level2Name" />
+        </span>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- LEVEL 3: Automatic vs. Named                                 -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto' && level1Option != 'Auto' && level2Option != 'Auto')">
+      <div class="col-md-2">
+        <label>Level 3</label>
+      </div>
+      <div class="col-md-10">
+        <input type="radio" name="rdoLevel3" value="Auto" checked
+               (change)="onLevel3Change('Auto')" /> Auto &nbsp;
+        <input type="radio" name="rdoLevel3" value="Named"
+               (change)="onLevel3Change('Named')" /> {{ level3NameLabel }} &nbsp;
+        <span *ngIf="(level3Option == 'Named')">
+          <input type="text" name="level3Name" required maxlength="1000" size="40"
+                 [(ngModel)]="level3Name" />
+        </span>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- LEVEL 4: Automatic vs. Named                                 -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto' && level1Option != 'Auto' && level2Option != 'Auto' && level3Option != 'Auto')">
+      <div class="col-md-2">
+        <label>Level 4</label>
+      </div>
+      <div class="col-md-10">
+        <input type="radio" name="rdoLevel4" value="Auto" checked
+               (change)="onLevel4Change('Auto')" /> Auto &nbsp;
+        <input type="radio" name="rdoLevel4" value="Named"
+               (change)="onLevel4Change('Named')" /> {{ level4NameLabel }} &nbsp;
+        <span *ngIf="(level4Option == 'Named')">
+          <input type="text" name="level4Name" required maxlength="1000" size="40"
+                 [(ngModel)]="level4Name" />
+        </span>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- LEVEL 5: Automatic vs. Named                                 -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto' && level1Option != 'Auto' && level2Option != 'Auto' && level3Option != 'Auto' && level4Option != 'Auto')">
+      <div class="col-md-2">
+        <label>Level 5</label>
+      </div>
+      <div class="col-md-10">
+        <input type="radio" name="rdoLevel5" value="Auto" checked
+               (change)="onLevel5Change('Auto')" /> Auto &nbsp;
+        <input type="radio" name="rdoLevel5" value="Named"
+               (change)="onLevel5Change('Named')" /> {{ level5NameLabel }} &nbsp;
+        <span *ngIf="(level5Option == 'Named')">
+          <input type="text" name="level5Name" required maxlength="1000" size="40"
+                 [(ngModel)]="level5Name" />
+        </span>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- POINT: Automatic vs. Named                                 -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto')">
+      <div class="col-md-2">
+        <label>Point</label>
+      </div>
+      <div class="col-md-10">
+        <span *ngIf="(methodOption == 'Professional')">
+          <label>Name:</label>
+        </span>
+        <span *ngIf="(methodOption != 'Professional')">
+          <input type="radio" name="rdoPointMethod" value="Auto" checked
+                 (change)="onPointOptionChange('Auto')" /> Auto &nbsp;
+          <input type="radio" name="rdoPointMethod" value="Named"
+                 (change)="onPointOptionChange('Named')" /> {{ pointNameLabel }} &nbsp;
+        </span>
+        <span *ngIf="(pointOption == 'Named')">
+          <input type="text" name="pointName" required maxlength="1000" size="40"
+                 [(ngModel)]="pointName" />
+        </span>
+        <span *ngIf="(pointOption != 'Named')">
+          <label class="blue">{{ pointName }}</label>
+        </span>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- CARD TYPE: Statement, Question Types                         -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto')">
+      <div class="col-md-2">
+        <label>Card Type</label>
+      </div>
+      <div class="col-md-10">
+        <input type="radio" name="cardType" value="Statement" [checked]="cardType == 'Statement'"
+               (change)="onCardTypeChange('Statement')" /> Statement&nbsp;&nbsp;
+        <input type="radio" name="cardType" value="Multiple Choice"  [checked]="cardType == 'Multiple Choice'"
+               (change)="onCardTypeChange('Multiple Choice')" /> Multiple Choice&nbsp;&nbsp;
+        <input type="radio" name="cardType" value="Fill-In"  [checked]="cardType == 'Fill-In'"
+               (change)="onCardTypeChange('Fill-In')" checked /> Fill-In&nbsp;&nbsp;
+        <input type="radio" name="cardType" value="Fill-In Swappable"  [checked]="cardType == 'Fill-In Swappable'"
+               (change)="onCardTypeChange('Fill-In Swappable')" /> Fill-In Swappable&nbsp;&nbsp;
+        <input type="radio" name="cardType" value="True / False"  [checked]="cardType == 'True / False'"
+               (change)="onCardTypeChange('True / False')" /> True / False&nbsp;&nbsp;
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- STATEMENT                                                    -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto' && cardType == 'Statement')">
+      <div class="col-md-2">
+        <label>Statement</label>
+      </div>
+      <div class="col-md-10">
+        <textarea #statement type="text" id="Statement" required maxlength="1000" cols="62" rows="6"></textarea>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- QUESTION                                                     -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(cardType != 'Statement')">
+      <div class="col-md-2">
+        <label>Question</label>
+      </div>
+      <div class="col-md-10">
+        <textarea #question type="text" id="Question" required maxlength="1000" cols="62" rows="3"></textarea>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- ANSWER                                                       -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(cardType != 'Statement' && cardType != 'True / False')">
+      <div class="col-md-2">
+        <label>Answer</label>
+      </div>
+      <div class="col-md-10">
+        <input #answer type="text" id="Answer" required maxlength="1000" size="60" />
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- ANSWER Alternative 1                                         -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto' && cardType == 'Multiple Choice')">
+      <div class="col-md-2">
+        <label>Alternative 1</label>
+      </div>
+      <div class="col-md-10">
+        <input #answeralt1 type="text" id="AnswerAlt1" required maxlength="1000" size="60" />
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- ANSWER Alternative 1                                         -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto' && cardType == 'Multiple Choice')">
+      <div class="col-md-2">
+        <label>Alternative 2</label>
+      </div>
+      <div class="col-md-10">
+        <input #answeralt2 type="text" id="AnswerAlt2" required maxlength="1000" size="60" />
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- ANSWER Alternative 1                                         -->
+    <!-- ============================================================ -->
+    <!-- Answer Alternative 3 -->
+    <div class="row" *ngIf="(methodOption != 'Auto' && cardType == 'Multiple Choice')">
+      <div class="col-md-2">
+        <label>Alternative 3</label>
+      </div>
+      <div class="col-md-10">
+        <input #answeralt3 type="text" id="AnswerAlt3" required maxlength="1000" size="60" />
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- ANSWER True / False                                          -->
+    <!-- ============================================================ -->
+    <div class="row" *ngIf="(methodOption != 'Auto' && cardType == 'True / False')">
+      <div class="col-md-2">
+        <label>Answer</label>
+      </div>
+      <div class="col-md-10">
+        <input type="radio" name="trueFalse" value="True" checked
+               (change)="onTrueFalseChange('True')" /> True&nbsp;&nbsp;
+        <input type="radio" name="trueFalse" value="False"
+               (change)="onTrueFalseChange('False')" /> False&nbsp;&nbsp;
+        <input type="radio" name="trueFalse" value="Mostly True"
+               (change)="onTrueFalseChange('Mostly True')" /> Mostly True&nbsp;&nbsp;
+        <input type="radio" name="trueFalse" value="Mostly False"
+               (change)="onTrueFalseChange('Mostly False')" /> Mostly False&nbsp;&nbsp;
+      </div>
+    </div>
+    <!-- ============================================================ -->
+    <!-- BUTTON Bar                                                   -->
+    <!-- ============================================================ -->
+    <div class="row">
+      <div class="col-md-12">
+        &nbsp;
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <span id="nextCard">
+          <button (click)="nextCard()"
+                  class="btn btn-primary">
+            <span class="glyphicon glyphicon-play"></span>
+            &nbsp;Next
+          </button>
+        </span>
+        <span id="playGame">
+          <button (click)="playGame()"
+                  class="btn btn-info">
+            <span class="glyphicon glyphicon-bell"></span>
+            &nbsp;Play
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>  <!-- end panel -->
+</form>
+

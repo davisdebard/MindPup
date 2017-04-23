@@ -1,0 +1,86 @@
+﻿<Project ToolsVersion="15.0" Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Files not to show in IDE -->
+    <None Remove="yarn.lock" />
+
+    <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Content Remove="ClientApp\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\images\award-100.bmp" />
+    <None Include="wwwroot\images\award-80.bmp" />
+    <None Include="wwwroot\images\award-90.bmp" />
+    <None Include="wwwroot\images\Awards.bmp" />
+    <None Include="wwwroot\images\Awards.png" />
+    <None Include="wwwroot\images\Awards.pptx" />
+    <None Include="wwwroot\images\beautiful oval trail.bmp" />
+    <None Include="wwwroot\images\beautiful trail.bmp" />
+    <None Include="wwwroot\images\boost-10.bmp" />
+    <None Include="wwwroot\images\boost-20.bmp" />
+    <None Include="wwwroot\images\boost-30.bmp" />
+    <None Include="wwwroot\images\check-plus.png" />
+    <None Include="wwwroot\images\check.png" />
+    <None Include="wwwroot\images\diamond.png" />
+    <None Include="wwwroot\images\emerald.png" />
+    <None Include="wwwroot\images\improve-10.png" />
+    <None Include="wwwroot\images\improve-20.png" />
+    <None Include="wwwroot\images\improve-30.png" />
+    <None Include="wwwroot\images\mind-pup-logo.png" />
+    <None Include="wwwroot\images\mind-pup.png" />
+    <None Include="wwwroot\images\one-thumb-up.png" />
+    <None Include="wwwroot\images\perform-100.png" />
+    <None Include="wwwroot\images\perform-80.png" />
+    <None Include="wwwroot\images\perform-90.png" />
+    <None Include="wwwroot\images\ruby.png" />
+    <None Include="wwwroot\images\smile.bmp" />
+    <None Include="wwwroot\images\smile.png" />
+    <None Include="wwwroot\images\star.bmp" />
+    <None Include="wwwroot\images\star.png" />
+    <None Include="wwwroot\images\thumb.bmp" />
+    <None Include="wwwroot\images\trail-001.png" />
+    <None Include="wwwroot\images\trail-002.png" />
+    <None Include="wwwroot\images\trail-003.png" />
+    <None Include="wwwroot\images\trail-004.png" />
+    <None Include="wwwroot\images\trail-005.png" />
+    <None Include="wwwroot\images\trail-006.png" />
+    <None Include="wwwroot\images\trail-007.png" />
+    <None Include="wwwroot\images\trail-008.png" />
+    <None Include="wwwroot\images\trail-009.png" />
+    <None Include="wwwroot\images\trail-010.png" />
+    <None Include="wwwroot\images\two-thumbs-up.png" />
+    <None Include="wwwroot\images\two-thumbs.bmp" />
+  </ItemGroup>
+  <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec Command="npm install" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="wwwroot\dist\**; ClientApp\dist\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+</Project>
