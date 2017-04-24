@@ -13,20 +13,20 @@ namespace mindpup.Controllers
     [Route("api/MindPupAPI")]
     public class MindPupAPI : Controller
     {
-        private readonly mindPupContext _context;
+        private readonly MindPupContext _context;
 
-        public MindPupAPI (mindPupContext context)
+        public MindPupAPI (MindPupContext context)
         {
             _context = context;
         }
 
-    // GET: api/MindPupAPI/Contact
+    // GET: api/MindPupAPI/contact
 
     [HttpGet]
-    [Route("Contact")]
-    public IEnumerable<MindPupAPI> GetMindPup()
+    [Route("contact")]
+    public IEnumerable<MindPup> GetMindPup()
     {
-      IEnumerable<MindPupAPI> _retArray = _context.MindPup as IEnumerable<MindPupAPI>;
+      IEnumerable<MindPup> _retArray = _context.MindPup as IEnumerable<MindPup>;
       return _retArray;
     }
   }

@@ -28,7 +28,7 @@ namespace mindpup
     public void ConfigureServices(IServiceCollection services)
     {
       // Add Entity framework.
-      services.AddDbContext<mindPupContext>(options =>
+      services.AddDbContext<MindPupContext>(options =>
        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
       // Add framework services.

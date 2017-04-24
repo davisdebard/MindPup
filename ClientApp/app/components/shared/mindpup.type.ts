@@ -1,4 +1,5 @@
 ﻿export class MindPup {
+
     MindPupId: number;
     AddressLine1: string;
     AddressLine2: string;
@@ -8,6 +9,5 @@
     PhoneMain: string;
  
     constructor() {
-
     }
 }

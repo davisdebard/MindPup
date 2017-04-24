@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MindPup } from '../shared/mindpup.type';
+import { MINDPUP1 } from '../shared/mock-mindpup';
 import { MindPupService } from '../shared/mindpup.service';
 
 @NgModule({
@@ -21,31 +22,29 @@ import { MindPupService } from '../shared/mindpup.service';
     selector: 'contact',
     templateUrl: './contact.component.html',
     styleUrls: ['contact.component.css'],
-    providers: [ MindPupService ]
+    providers: [MindPupService]
 })
 export class ContactComponent implements OnInit {
 
-    contacts: MindPup[];
-
-    constructor(private mindPupService: MindPupService)
-    {
+    constructor(private mindPupService: MindPupService) {
 
     }
 
-    ngOnInit(): void {
-        this.getMindPup();
-    }
-
-    getMindPup(): void {
-        this.mindPupService.getMindPup().then(contacts => this.contacts = contacts);
-    }
+    private contacts: MindPup[];
     
-    //constructor(http: Http) {
-    //    http.get('api/MindPupAPI/MindPup').subscribe(result => {
-    //        this.contacts = result.json() as MindPup[];
-    //    });
+    ngOnInit(): void {
+        this.mindPupService
+            .getMindPup()
+            .then(c => this.contacts = c);
+    }
+    //http.get('api/MindPupAPI/contact').subscribe(result => {
+    //    this.contacts = result.json() as MindPup[];
+
+    //getMindPup(): void {
+    //    this.mindPupService.getMindPup().then(contacts => this.contacts = contacts);
     //}
-} 
+
+}
 
 //interface MindPup {
 //    mindPupId: number;

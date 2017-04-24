@@ -2,11 +2,11 @@
 
 namespace mindpup.Data
 {
-  public class mindPupContext : DbContext
+  public class MindPupContext : DbContext
   {
-    public mindPupContext(DbContextOptions<mindPupContext> options)
+    public MindPupContext(DbContextOptions<MindPupContext> options)
           : base(options) { }
-    public mindPupContext() { }
+    public MindPupContext() { }
     public DbSet<MindPup> MindPup { get; set; }
   }
 }
