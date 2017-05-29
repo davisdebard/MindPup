@@ -7,13 +7,13 @@
     </div> 
   </div> 
   <!-- body -->
-  <div class="panel-body">
+  <div class="panel-body" *ngFor="let contact of contacts">
     <div class="row">
       <div class="col-md-1">
         <label>Email</label>
       </div>
       <div class="col-md-11">
-       <!--{{ contacts.EmailMain }}-->
+       {{ contact.emailMain }}
       </div>
     </div>  
     <div class="row">
@@ -21,7 +21,7 @@
         <label>Phone</label>
       </div>
       <div class="col-md-11">
-        <!--{{ contacts.PhoneMain }}-->
+         {{ contact.phoneMain }}
       </div>
     </div>  
     <div class="row">
@@ -29,7 +29,7 @@
         <label>Address</label>
       </div>
       <div class="col-md-11">
-        <!--{{ contacts.AddressLine1 contacts.AddressLine2 contacts.AddressLine3 }}-->
+        {{ contact.addressLine1 }}<br />{{ contact.addressLine2 }}<br />{{ contact.addressLine3 }}
       </div>
     </div>  
   </div> 

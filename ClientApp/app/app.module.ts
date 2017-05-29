@@ -2,7 +2,7 @@
 import { UniversalModule } from 'angular2-universal';
 
 // @angular.
-import { NgModule } from '@angular/core';
+import { NgModule, EventEmitter } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 //import { FormsModule, NgForm } from '@angular/forms';
@@ -19,11 +19,14 @@ import { IntroComponent } from './components/intro/intro.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { PlayComponent } from './components/play/play.component';
 import { CreateComponent } from './components/create/create.component';
+import { PointsComponent } from './components/points/points.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { TestingComponent } from './components/testing/testing.component';
+//import { globalvarsService } from './components/shared/globalvars.service';
+import { CtlMultChoiceComponent } from './components/ctlmultchoice/ctlmultchoice.component';
 
 @NgModule({
-    bootstrap: [ AppComponent ],
+    bootstrap:[AppComponent],
     declarations: [
          // App.
          AppComponent
@@ -34,8 +37,10 @@ import { TestingComponent } from './components/testing/testing.component';
         ,ExploreComponent
         ,PlayComponent
         ,CreateComponent
+        ,PointsComponent
         ,ContactComponent
         ,TestingComponent
+        ,CtlMultChoiceComponent
     ],
     imports: [
         UniversalModule // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -48,6 +53,7 @@ import { TestingComponent } from './components/testing/testing.component';
             { path: 'explore', component: ExploreComponent },
             { path: 'play', component: PlayComponent },
             { path: 'create', component: CreateComponent },
+            { path: 'points', component: PointsComponent },
             { path: 'contact', component: ContactComponent },
             { path: 'testing', component: TestingComponent },
             //{ path: '**', redirectTo: 'home' }
@@ -55,4 +61,8 @@ import { TestingComponent } from './components/testing/testing.component';
     ]
 })
 export class AppModule {
+
+    //globalvarsService.updateScreenName('Home');
+
+    //screenNm = globalvarsService.screenName;
 }

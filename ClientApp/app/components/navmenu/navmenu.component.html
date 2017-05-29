@@ -14,32 +14,37 @@
     <div class='navbar-collapse collapse'>
       <ul class='nav navbar-nav'>
         <li [routerLinkActive]="['link-active']">
-          <a [routerLink]="['/home']">
+          <a [routerLink]="['/home']" data-toggle='collapse' data-target='.navbar-collapse'>
             <span class='glyphicon glyphicon-home'></span> Home
           </a>
         </li>
         <li [routerLinkActive]="['link-active']" *ngIf="isIntro == true">
-          <a [routerLink]="['/intro']">
+          <a [routerLink]="['/intro']" data-toggle='collapse' data-target='.navbar-collapse'>
             <span class='glyphicon glyphicon-question-sign'></span> Intro
           </a>
         </li>
         <li [routerLinkActive]="['link-active']">
-          <a [routerLink]="['/explore']">
+          <a [routerLink]="['/explore']" data-toggle='collapse' data-target='.navbar-collapse'>
             <span class='glyphicon glyphicon-search'></span> Explore
           </a>
         </li>
         <li [routerLinkActive]="['link-active']">
-          <a [routerLink]="['/play']">
+          <a [routerLink]="['/play']" data-toggle='collapse' data-target='.navbar-collapse'>
             <span class='glyphicon glyphicon-bell'></span> Play
           </a>
         </li>
         <li [routerLinkActive]="['link-active']">
-          <a [routerLink]="['/create']">
+          <a [routerLink]="['/create']" data-toggle='collapse' data-target='.navbar-collapse'>
             <span class='glyphicon glyphicon-education'></span> Create
           </a>
         </li>
         <li [routerLinkActive]="['link-active']">
-          <a [routerLink]="['/contact']">
+          <a [routerLink]="['/points']" data-toggle='collapse' data-target='.navbar-collapse'>
+            <span class='glyphicon glyphicon-book'></span> Points
+          </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+          <a [routerLink]="['/contact']" data-toggle='collapse' data-target='.navbar-collapse'>
             <span class='glyphicon glyphicon-phone'></span> Contact
           </a>
         </li>

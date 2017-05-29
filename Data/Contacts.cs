@@ -2,10 +2,10 @@
 
 namespace mindpup.Data
 {
-    public class MindPup
+    public class Contacts
     {
     [Key]
-    public int MindPupId { get; set; }
+    public int ContactId { get; set; }
 
     [Required]
     [Display(Name ="Address Line 1")]

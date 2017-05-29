@@ -17,7 +17,32 @@
     <!-- ============================================================ -->
     <div class="row">
       <div class="col-md-12">
-        Mind Pup is a new way of learning anything you want to learn.
+        <h2>{{ titleVal }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        {{ descriptionVal }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        &nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <span>
+          <button class="btn btn-primary" (click)="moveOn('Down')">
+            <span class="glyphicon glyphicon-arrow-left "></span> Previous
+          </button>&nbsp;&nbsp;
+        </span>
+
+        <span *ngIf="isAtEnd == false">
+          <button class="btn btn-primary" (click)="moveOn('Up')">
+            <span class="glyphicon glyphicon-arrow-right "></span> Next
+          </button>&nbsp;&nbsp;
+        </span>
       </div>
     </div>
     <div class="row">

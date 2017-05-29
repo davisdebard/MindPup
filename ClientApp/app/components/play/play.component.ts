@@ -1,4 +1,4 @@
-﻿import { Component, Directive, OnInit } from '@angular/core';
+﻿import { Component, Directive, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgIf } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Card } from './card';
@@ -11,6 +11,8 @@ import { NgForm } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { CtlMultChoiceComponent } from '../ctlmultchoice/ctlmultchoice.component';
+    
 @NgModule({
     imports: [
         BrowserModule,
@@ -114,6 +116,10 @@ export class PlayComponent implements OnInit {
     cardStatus = "Not Started";
     cardType = "";
     cardTypeNo: number;
+    choiceLetterA = "A";
+    choiceLetterB = "B";
+    choiceLetterC = "C";
+    choiceLetterD = "D";
     hasQuestions: number;
     hasStatements: number;
     phase = "Play";         // Alternative is "Verify".
@@ -1041,6 +1047,7 @@ export class PlayComponent implements OnInit {
         {
             return;
         }
+        console.log('Answer selected is ', ansLetter);
 
         // Process after an answer is selected. 
         if (this.phase == "Play") {

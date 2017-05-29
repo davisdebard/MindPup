@@ -1,8 +1,8 @@
-﻿import { MindPup } from './mindpup.type';
+﻿import { Contacts } from './contacts.type';
 
-export const MINDPUP1: MindPup[] = [
+export const CONTACT1: Contacts[] = [
     {
-        MindPupId: 1,
+        ContactId: 1,
         AddressLine1: '240 Darfo Court',
         AddressLine2: 'P.O. Box 4505',
         AddressLine3: 'Crestline, CA 92325-4505',

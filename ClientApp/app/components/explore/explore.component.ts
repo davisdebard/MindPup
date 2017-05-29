@@ -1,13 +1,12 @@
 ﻿//import { Component, Directive, OnInit, AfterViewInit, ViewChildren } from '@angular/core';
 import { Component, Directive, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgForm } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Game } from './game';
-import { GAMES } from './mock-games';
+import { Games } from '../shared/games.type';
+import { GamesService } from '../shared/games.service';
 import { FocusDirective } from '../shared/focus-directive';
 
 @NgModule({
@@ -23,26 +22,40 @@ import { FocusDirective } from '../shared/focus-directive';
     selector: 'explore',
     templateUrl: './explore.component.html',
     styleUrls: ['explore.component.css'],
+    providers: [ GamesService ]
 })
 //export class ExploreComponent implements AfterViewInit, OnInit {
 export class ExploreComponent implements OnInit {
-    constructor() { }
+    constructor(private gamesService: GamesService) {
+    }
+    games = [{
+        GameId: 1,
+        Title: '',
+        DateCreated: null,
+        ThemeId: 1,
+        UserId: 1,
+        zSystemUse: null
+    }];
 
-   // @ViewChildren('input') vc;
+    ngOnInit(): void {
+
+        this.gamesService
+            .getGames()
+            .then(g => this.games = g);
+    }
+
+    // @ViewChildren('input') vc;
 
     // Set focus on Input box.
-   // ngAfterViewInit() {
-   ////     this.vc.first.nativeElement.focus();
-   // }
+    // ngAfterViewInit() {
+    ////     this.vc.first.nativeElement.focus();
+    // }
 
     /******************************
     * Values
     *******************************/
     gameId = 0;
     resultsFound = 0;
-
-    // Objects.
-    gameSet = GAMES;
 
     /******************************
     * Methods
@@ -54,11 +67,6 @@ export class ExploreComponent implements OnInit {
     onGameSelect(id): void {
         this.gameId = id;
     };
-
-    ngOnInit(): void {
-        
-    }
-  
 }  // End ExploreComponent
 
 

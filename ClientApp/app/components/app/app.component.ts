@@ -1,16 +1,16 @@
-﻿import { Component } from '@angular/core';
-import { MindPupService } from '../shared/mindpup.service';
+﻿import { Component, Output } from '@angular/core';
 
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [MindPupService]
+    //providers: [MindPupService]
 })
 export class AppComponent {
+   // @Output pageName: string;
 
-    constructor(private mindPupService: MindPupService) {
-
+    constructor() {
+        //this.pageName = "home";
     }
 
 }

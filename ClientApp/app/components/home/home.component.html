@@ -2,69 +2,54 @@
   <div class="panel-heading">
     <div class="row">
       <!-- ============================================================ -->
-      <!-- LOGO                                                         -->
+      <!-- BUTTONS to major parts of the application                    -->
       <!-- ============================================================ -->
-      <div class="col-md-4">
-        <img src="/images/mind-pup-logo.png" />
-      </div>
-      <div class="col-md-8" *ngIf="isLoggedIn == false">
+      <div class="col-md-12">
         <br />
         <!-- ============================================================ -->
-        <!-- LOG IN button                                                -->
+        <!-- EXPLORE button                                               -->
         <!-- ============================================================ -->
-        <button class="btn btn-info" (click)="onLogIn()">
-          <span class="glyphicon glyphicon-arrow-right "></span>
-          &nbsp;Log In
+        <button class="btn btn-danger">
+          <span class="glyphicon glyphicon-search "></span>
+          &nbsp;Explore
         </button>
-        <br />
         &nbsp;
-        <br />
         <!-- ============================================================ -->
-        <!-- FREE ACCOUNT button                                          -->
+        <!-- CREATE button                                               -->
         <!-- ============================================================ -->
         <button class="btn btn-success">
-          <span class="glyphicon glyphicon-arrow-up "></span>
-          &nbsp;Free Account
+          <span class="glyphicon glyphicon-education "></span>
+          &nbsp;Create
         </button>
-      </div>
-      <div class="col-md-8" *ngIf="isLoggedIn == true">
-        <span class="blue">Welcome, {{ userName }}!</span>
+        &nbsp;
+        <!-- ============================================================ -->
+        <!-- SIGN IN button                                               -->
+        <!-- ============================================================ -->
+        <span *ngIf="isLoggedIn == false">
+          <button class="btn btn-info" (click)="onLogIn()">
+            <span class="glyphicon glyphicon-arrow-right "></span>
+            &nbsp;Sign In
+          </button>
+        </span>
+        <!-- ============================================================ -->
+        <!-- WELCOME if signed in already                                 -->
+        <!-- ============================================================ -->
+        <span *ngIf="isLoggedIn == true">
+          <span class="blue">Welcome, {{ userName }}!</span>
+        </span>
       </div>
     </div>
-  </div>
-  <!-- end header panel -->
-  <!-- body -->
-  <div class="panel-body">
-    <div class="row" *ngIf="isIntro == false">
-      <!-- ============================================================ -->
-      <!-- LEARN ABOUT textbox                                          -->
-      <!-- ============================================================ -->
-      <div class="col-md-2">
-        <label>Learn about&nbsp;</label>
-      </div>
-      <div class="col-md-10">
-        <input type="text" name="searchKey" (keypress)="onSearchKeyPress(searchKey.value)" #searchKey />
-        <br />
-        {{ searchEntry }}
+    <!-- end header panel -->
+    <!-- body -->
+    <div class="panel-body">
+      <div class="row">
         <!-- ============================================================ -->
-        <!-- INTRO link                                                   -->
+        <!-- ROTATOR                                                      -->
         <!-- ============================================================ -->
-        <a href="intro">MindPup? What's Up?</a>
-      </div>
-    </div>
-    <div #Intro class="row" *ngIf="isIntro == true">
-      <!-- ============================================================ -->
-      <!-- INTRO                                                        -->
-      <!-- ============================================================ -->
-      <div class="col-md-12">
-        Mind Pup is a new way of learning anything you want to learn.
-      </div>
-
-      <div class="col-md-12">
-        <button class="btn btn-info" (click)="onRestore()">
-          <span class="glyphicon glyphicon-arrow-up "> Restore</span>
-          &nbsp;Log In
-        </button>
+        <div class="col-md-12">
+          <!--<img src="../../../../wwwroot/images/MP Rotator 00.jpg" />-->
+          <img src="../../../../wwwroot/images/mind-pup-logo.png" />
+        </div>
       </div>
     </div>
   </div>

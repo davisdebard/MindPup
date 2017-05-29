@@ -1,0 +1,33 @@
+﻿<form onsubmit="" class="form-horizontal">
+  <!-- ============================================================ -->
+  <!-- HEADER                                                       -->
+  <!-- ============================================================ -->
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-12">
+        <h1><span class='glyphicon glyphicon-book'></span> Game: SAMPLE</h1>
+      </div>
+    </div>
+  </div>
+  <!-- end header panel -->
+  <!-- body -->
+  <div class="panel-body">
+    <!-- ============================================================ -->
+    <!-- List of points in this level of this game                    -->
+    <!-- ============================================================ -->
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Level 1: SAMPLE</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngFor="let p of points">{{p.pointName}}</div>
+      </div>
+    </div>
+  </div>
+  <!-- end panel-form-group -->
+</form>
+
+
+

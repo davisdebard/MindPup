@@ -1,0 +1,42 @@
+﻿<!-- ============================================================ -->
+<!-- CONTROL: MULTIPLE CHOICE                                     -->
+<!-- ============================================================ -->
+<!--Uses:  answerGivenLetter Has value when in 'Seen ...' status
+           answerLetter    A, B, C or D (variable)
+           cardStatus      Only visible if 'Play Question', 'Seen Correct' or 'Seen Incorrect'
+           cardType        Only visible if 'Multiple Choice' or 'True False'
+           choiceAnswer    Answer, Ans1Alt, Ans2Alt, or Ans3Alt
+           choiceLetter    A, B, C, or D (fixed: A first, etc.)-->
+
+<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
+                                         cardStatus == 'Seen Correct' ||
+                                         cardStatus == 'Seen Incorrect') &&
+                                         (cardType == 'Multiple Choice' ||
+                                          cardType == 'True False')">
+  <div class="col-md-12">
+    <div (click)="onAnswerSelected(choiceLetter)"
+         [class.incorrect-answer]="answerLetter != choiceLetter &&
+                        answerGivenLetter == choiceLetter &&
+                        cardStatus == 'Seen Incorrect'"
+         [class.correct-answer]="answerLetter == choiceLetter"
+         [class.other-answer]="answerLetter != choiceLetter &&
+                        answerGivenLetter != choiceLetter"
+         [class.answer-given]="answerGivenLetter == choiceLetter
+                        && answerLetter != choiceLetter"
+         [class.answer-a]="cardStatus == 'Play Question'  &&
+                            choiceLetter == 'A'"
+         [class.answer-b]="cardStatus == 'Play Question'  &&
+                            choiceLetter == 'B'"
+         [class.answer-c]="cardStatus == 'Play Question'  &&
+                            choiceLetter == 'C'"
+         [class.answer-d]="cardStatus == 'Play Question'  &&
+                            choiceLetter == 'D'">
+      &nbsp;&nbsp;
+      <span>
+        {{ choiceAnswer }}
+      </span>
+    </div>
+  </div>
+</div>
+
+

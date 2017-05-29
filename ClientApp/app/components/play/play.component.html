@@ -172,107 +172,50 @@
 <!-- ============================================================ -->
 <!-- ANSWER:  Multiple Choice: Row A                              -->
 <!-- ============================================================ -->
-<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
-                                         cardStatus == 'Seen Correct' ||
-                                         cardStatus == 'Seen Incorrect') &&
-                                         (cardType == 'Multiple Choice' ||
-                                          cardType == 'True False')">
-  <div class="col-md-12">
-    <div id="AnswerA" (click)="selectAnswer('A')"
-         [class.incorrect-answer]="answerLetter != 'A' &&
-                        answerGivenLetter == 'A' &&
-                        cardStatus == 'Seen Incorrect'"
-         [class.correct-answer]="answerLetter == 'A'"
-         [class.other-answer]="answerLetter != 'A' &&
-                        answerGivenLetter != 'A'"
-         [class.answer-given]="answerGivenLetter == 'A'
-                        && answerLetter != 'A'"
-         [class.answer-a]="cardStatus == 'Play Question'">
-      &nbsp;&nbsp;
-      <span *ngIf="cardType == 'Multiple Choice' || cardType == 'True False'">
-        {{answer}}
-      </span>
-    </div>
-  </div>
-</div>
+<ctl-mult-choice [answerLetter]="answerLetter"
+                 [answerGivenLetter]="answerGivenLetter"
+                 [cardStatus]="cardStatus"
+                 [cardType]="cardType"
+                 [choiceAnswer]="answer"
+                 [choiceLetter]="'A'"
+                 (answerGiven)="selectAnswer($event)">
+</ctl-mult-choice>
 <!-- ============================================================ -->
 <!-- ANSWER:  Multiple Choice: Row B                              -->
 <!-- ============================================================ -->
-<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
-                                         cardStatus == 'Seen Correct' ||
-                                         cardStatus == 'Seen Incorrect') &&
-                                         (cardType == 'Multiple Choice' ||
-                                          cardType == 'True False')">
-  <div class="col-md-12">
-    <div id="AnswerA" (click)="selectAnswer('B')"
-         [class.incorrect-answer]="answerLetter != 'B' &&
-                        answerGivenLetter == 'B' &&
-                        cardStatus == 'Seen Incorrect'"
-         [class.correct-answer]="answerLetter == 'B'"
-         [class.other-answer]="answerLetter != 'B' &&
-                        answerGivenLetter != 'B'"
-         [class.answer-given]="answerGivenLetter == 'B'
-                        && answerLetter != 'B'"
-         [class.answer-a]="cardStatus == 'Play Question'">
-      &nbsp;&nbsp;
-      <span *ngIf="cardType == 'Multiple Choice' || cardType == 'True False'">
-        {{answer}}
-      </span>
-    </div>
-  </div>
-</div>
+<ctl-mult-choice [answerLetter]="answerLetter"
+                 [answerGivenLetter]="answerGivenLetter"
+                 [cardStatus]="cardStatus"
+                 [cardType]="cardType"
+                 [choiceAnswer]="ans1Alt"
+                 [choiceLetter]="'B'"
+                 (answerGiven)="selectAnswer($event)">
+</ctl-mult-choice>
+
 <!-- ============================================================ -->
 <!-- ANSWER:  Multiple Choice: Row C                              -->
 <!-- ============================================================ -->
-<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
-                                         cardStatus == 'Seen Correct' ||
-                                         cardStatus == 'Seen Incorrect') &&
-                                         (cardType == 'Multiple Choice' ||
-                                          cardType == 'True False')">
-  <div class="col-md-12">
-    <div id="AnswerA" (click)="selectAnswer('C')"
-         [class.incorrect-answer]="answerLetter != 'C' &&
-                        answerGivenLetter == 'C' &&
-                        cardStatus == 'Seen Incorrect'"
-         [class.correct-answer]="answerLetter == 'C'"
-         [class.other-answer]="answerLetter != 'C' &&
-                        answerGivenLetter != 'C'"
-         [class.answer-given]="answerGivenLetter == 'C'
-                        && answerLetter != 'C'"
-         [class.answer-a]="cardStatus == 'Play Question'">
-      &nbsp;&nbsp;
-      <span *ngIf="cardType == 'Multiple Choice' || cardType == 'True False'">
-        {{answer}}
-      </span>
-    </div>
-  </div>
-</div>
+<ctl-mult-choice [answerLetter]="answerLetter"
+                 [answerGivenLetter]="answerGivenLetter"
+                 [cardStatus]="cardStatus"
+                 [cardType]="cardType"
+                 [choiceAnswer]="ans2Alt"
+                 [choiceLetter]="'C'"                 
+                 (answerGiven)="selectAnswer($event)">
+</ctl-mult-choice>
+
 <!-- ============================================================ -->
 <!-- ANSWER:  Multiple Choice: Row D                              -->
 <!-- ============================================================ -->
-<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
-                                         cardStatus == 'Seen Correct' ||
-                                         cardStatus == 'Seen Incorrect') &&
-                                         (cardType == 'Multiple Choice' ||
-                                          cardType == 'True False')">
-  <div class="col-md-12">
-    <div id="AnswerA" (click)="selectAnswer('D')"
-         [class.incorrect-answer]="answerLetter != 'D' &&
-                        answerGivenLetter == 'D' &&
-                        cardStatus == 'Seen Incorrect'"
-         [class.correct-answer]="answerLetter == 'D'"
-         [class.other-answer]="answerLetter != 'D' &&
-                        answerGivenLetter != 'D'"
-         [class.answer-given]="answerGivenLetter == 'D'
-                        && answerLetter != 'D'"
-         [class.answer-a]="cardStatus == 'Play Question'">
-      &nbsp;&nbsp;
-      <span *ngIf="cardType == 'Multiple Choice' || cardType == 'True False'">
-        {{answer}}
-      </span>
-    </div>
-  </div>
-</div>
+<ctl-mult-choice [answerLetter]="answerLetter"
+                 [answerGivenLetter]="answerGivenLetter"
+                 [cardStatus]="cardStatus"
+                 [cardType]="cardType"
+                 [choiceAnswer]="ans3Alt"
+                 [choiceLetter]="'D'"                 
+                 (answerGiven)="selectAnswer($event)">
+</ctl-mult-choice>
+
 <!-- ============================================================ -->
 <!-- ANSWER: Fill-In Correct Answer                               -->
 <!-- ============================================================ -->

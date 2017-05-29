@@ -36,8 +36,13 @@
         <label>Result</label>
       </div>
       <div class="col-md-10">
-        <div *ngFor="let g of gameSet">
-          <a href="play" (click)="onGameSelect(g.GameId)">{{ g.GameName }}</a>
+        <div *ngFor="let g of games">
+          <!--<li [routerLinkActive]="['link-active']">
+            <a [routerLink]="['/play']">
+              <span class='glyphicon glyphicon-search'></span> 
+            </a>
+          </li>-->
+          <a href="play" (click)="onGameSelect(g.GameId)"><span class='glyphicon glyphicon-bell'></span> {{ g.title }} </a>
         </div>
       </div>
     </div>
