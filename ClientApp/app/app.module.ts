@@ -24,6 +24,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { TestingComponent } from './components/testing/testing.component';
 //import { globalvarsService } from './components/shared/globalvars.service';
 import { CtlMultChoiceComponent } from './components/ctlmultchoice/ctlmultchoice.component';
+import { MultChoiceComponent } from './components/multchoice/multchoice.component';
+
 
 @NgModule({
     bootstrap:[AppComponent],
@@ -41,6 +43,7 @@ import { CtlMultChoiceComponent } from './components/ctlmultchoice/ctlmultchoice
         ,ContactComponent
         ,TestingComponent
         ,CtlMultChoiceComponent
+        ,MultChoiceComponent
     ],
     imports: [
         UniversalModule // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

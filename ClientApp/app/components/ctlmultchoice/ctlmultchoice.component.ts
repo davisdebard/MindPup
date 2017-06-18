@@ -4,6 +4,7 @@
     Input,
     Output
 } from '@angular/core';
+import { MultChoiceComponent } from '../multchoice/multchoice.component';
 
 @Component({
     selector: 'ctl-mult-choice',
@@ -13,32 +14,37 @@
 export class CtlMultChoiceComponent {
     /**
      * @Input values come from parent.
+     * ctlAnswer   A, B, C or D value of the answer.
+     * ctlLetter   A, B, C or D value of this control.
+     * ctlSelected A, B, C or D value already selected for ctlStatus in ('Seen Correct', 'Seen Incorrect').
+     *                                                              Empty for ctlStatus = 'Play Question'.
+     * ctlStatus   Expect only 'Play Question', 'Seen Correct' or 'Seen Incorrect', though there are additional statuses.
+     * ctlText     The text of this choice.
      */ 
-    @Input() answerLetter: string;
-    @Input() answerGivenLetter: string;
-    @Input() cardStatus: string;
-    @Input() cardType: string;
-    @Input() choiceAnswer: string;
-    @Input() choiceLetter: string;
-    @Input() choiceName: string;
-
+    @Input() ctlAnswer: string;
+    @Input() ctlLetter: string;
+    @Input() ctlSelected: string;
+    @Input() ctlStatus: string;
+    @Input() ctlText: string;
+ 
     /**
      * @Output returns selected answer letter to parent.
      *         (The function selectAnswer(ansLetter) exists in play.component.ts, the parent.)
      */
-    @Output() answerGiven: EventEmitter<string>;
+    @Output() ctlChoice: EventEmitter<string>;
     
     constructor() {
-        this.answerGiven = new EventEmitter();
+        this.ctlChoice = new EventEmitter();
     }
 
     /**
-     * choiceLetter is both an @Input (choice may have already been made - now displaying)
-     *                  and an @Output (We may be making the choice now).
+     * ctlSelected = what has already been selected from a previous step.
+     * ctlChoice   = what is now being selected (status = 'Play Question').
+     * choiceLetter = the string that is passed in by the Click event.
      */
-    onAnswerSelected(choiceLetter: string): void
+    ctlSelect(choiceLetter: string): void
     {
-        console.log('Choice selected is ', choiceLetter);
-        this.answerGiven.emit(choiceLetter);
+        console.log('Choice is ', choiceLetter);
+        this.ctlChoice.emit(choiceLetter);
     }
 }

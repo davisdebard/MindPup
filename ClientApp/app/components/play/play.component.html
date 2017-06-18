@@ -170,51 +170,19 @@
   </div>
 </div>
 <!-- ============================================================ -->
-<!-- ANSWER:  Multiple Choice: Row A                              -->
+<!-- ANSWER:  Multiple Choice                              -->
 <!-- ============================================================ -->
-<ctl-mult-choice [answerLetter]="answerLetter"
-                 [answerGivenLetter]="answerGivenLetter"
-                 [cardStatus]="cardStatus"
-                 [cardType]="cardType"
-                 [choiceAnswer]="answer"
-                 [choiceLetter]="'A'"
-                 (answerGiven)="selectAnswer($event)">
-</ctl-mult-choice>
-<!-- ============================================================ -->
-<!-- ANSWER:  Multiple Choice: Row B                              -->
-<!-- ============================================================ -->
-<ctl-mult-choice [answerLetter]="answerLetter"
-                 [answerGivenLetter]="answerGivenLetter"
-                 [cardStatus]="cardStatus"
-                 [cardType]="cardType"
-                 [choiceAnswer]="ans1Alt"
-                 [choiceLetter]="'B'"
-                 (answerGiven)="selectAnswer($event)">
-</ctl-mult-choice>
+<mult-choice    [mcCardType]="cardType"
+                [mcAnswer]="answerLetter"
+                [mcSelected]="answerGivenLetter"
+                [mcStatus]="cardStatus"
+                [mcTextA]="answer"
+                [mcTextB]="ans1Alt"
+                [mcTextC]="ans2Alt"
+                [mcTextD]="ans3Alt"
 
-<!-- ============================================================ -->
-<!-- ANSWER:  Multiple Choice: Row C                              -->
-<!-- ============================================================ -->
-<ctl-mult-choice [answerLetter]="answerLetter"
-                 [answerGivenLetter]="answerGivenLetter"
-                 [cardStatus]="cardStatus"
-                 [cardType]="cardType"
-                 [choiceAnswer]="ans2Alt"
-                 [choiceLetter]="'C'"                 
-                 (answerGiven)="selectAnswer($event)">
-</ctl-mult-choice>
-
-<!-- ============================================================ -->
-<!-- ANSWER:  Multiple Choice: Row D                              -->
-<!-- ============================================================ -->
-<ctl-mult-choice [answerLetter]="answerLetter"
-                 [answerGivenLetter]="answerGivenLetter"
-                 [cardStatus]="cardStatus"
-                 [cardType]="cardType"
-                 [choiceAnswer]="ans3Alt"
-                 [choiceLetter]="'D'"                 
-                 (answerGiven)="selectAnswer($event)">
-</ctl-mult-choice>
+                (mcChoice)="selectAnswer($event)">
+</mult-choice>
 
 <!-- ============================================================ -->
 <!-- ANSWER: Fill-In Correct Answer                               -->

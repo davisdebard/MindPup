@@ -1,39 +1,30 @@
 ﻿<!-- ============================================================ -->
 <!-- CONTROL: MULTIPLE CHOICE                                     -->
 <!-- ============================================================ -->
-<!--Uses:  answerGivenLetter Has value when in 'Seen ...' status
-           answerLetter    A, B, C or D (variable)
-           cardStatus      Only visible if 'Play Question', 'Seen Correct' or 'Seen Incorrect'
-           cardType        Only visible if 'Multiple Choice' or 'True False'
-           choiceAnswer    Answer, Ans1Alt, Ans2Alt, or Ans3Alt
-           choiceLetter    A, B, C, or D (fixed: A first, etc.)-->
+<!-- 
+ctlAnswer   A, B, C or D value of the answer.
+ctlLetter   A, B, C or D value of this control. 
+ctlSelected A, B, C or D value already selected for ctlStatus = 'Seen Correct' or 'Seen Incorrect'.  Empty for ctlStatus = 'Play Question'.
+ctlStatus   Expect only 'Play Question', 'Seen Correct' or 'Seen Incorrect', though there are additional statuses.
+ctlText     The text of this choice.
+-->
 
-<div class="row pad-left answer" *ngIf="(cardStatus == 'Play Question' ||
-                                         cardStatus == 'Seen Correct' ||
-                                         cardStatus == 'Seen Incorrect') &&
-                                         (cardType == 'Multiple Choice' ||
-                                          cardType == 'True False')">
+<div class="row pad-left answer" *ngIf="(ctlStatus == 'Play Question' || 
+                                         ctlStatus == 'Seen Correct'  || 
+                                         ctlStatus == 'Seen Incorrect')">
   <div class="col-md-12">
-    <div (click)="onAnswerSelected(choiceLetter)"
-         [class.incorrect-answer]="answerLetter != choiceLetter &&
-                        answerGivenLetter == choiceLetter &&
-                        cardStatus == 'Seen Incorrect'"
-         [class.correct-answer]="answerLetter == choiceLetter"
-         [class.other-answer]="answerLetter != choiceLetter &&
-                        answerGivenLetter != choiceLetter"
-         [class.answer-given]="answerGivenLetter == choiceLetter
-                        && answerLetter != choiceLetter"
-         [class.answer-a]="cardStatus == 'Play Question'  &&
-                            choiceLetter == 'A'"
-         [class.answer-b]="cardStatus == 'Play Question'  &&
-                            choiceLetter == 'B'"
-         [class.answer-c]="cardStatus == 'Play Question'  &&
-                            choiceLetter == 'C'"
-         [class.answer-d]="cardStatus == 'Play Question'  &&
-                            choiceLetter == 'D'">
+    <div (click)="ctlSelect(ctlLetter)"
+         [class.answer-a]         ="ctlStatus == 'Play Question'  && ctlLetter == 'A'"
+         [class.answer-b]         ="ctlStatus == 'Play Question'  && ctlLetter == 'B'"
+         [class.answer-c]         ="ctlStatus == 'Play Question'  && ctlLetter == 'C'"
+         [class.answer-d]         ="ctlStatus == 'Play Question'  && ctlLetter == 'D'"
+
+         [class.correct-answer]   ="ctlStatus != 'Play Question'  && ctlLetter == ctlAnswer"
+         [class.incorrect-answer] ="ctlStatus == 'Seen Incorrect' && ctlLetter == ctlSelected"
+         [class.other-answer]     ="ctlStatus != 'Play Question'  && ctlLetter != ctlAnswer && ctlLetter != ctlSelected">
       &nbsp;&nbsp;
       <span>
-        {{ choiceAnswer }}
+        {{ ctlText }}
       </span>
     </div>
   </div>

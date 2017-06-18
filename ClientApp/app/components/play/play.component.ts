@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { CtlMultChoiceComponent } from '../ctlmultchoice/ctlmultchoice.component';
+import { MultChoiceComponent } from '../multchoice/multchoice.component';
     
 @NgModule({
     imports: [
