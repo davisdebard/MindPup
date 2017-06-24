@@ -1,4 +1,4 @@
-/********************************* 
+﻿/********************************* 
  CARDPLAY
  ========
  A "card play" is "working"" information about one point being played.
@@ -26,19 +26,19 @@ export class CardPlay {
     Q1Ans3Alt: string;                 
     Q1Ans4Alt: string;                 
     Q1Question: string;                
-    Q1TypeId: number;                   
+    Q1QuestionType: string;                   
     Q2Ans1Act: string;                  
     Q2Ans2Alt: string;                  
     Q2Ans3Alt: string;                  
     Q2Ans4Alt: string;                  
     Q2Question: string;                 
-    Q2TypeId: number;                   
+    Q2QuestionType: string;                   
     Q3Ans1Act: string;                  
     Q3Ans2Alt: string;                  
     Q3Ans3Alt: string;                 
     Q3Ans4Alt: string;                  
     Q3Question: string;                 
-    Q3TypeId: number;                   
+    Q3QuestionType: string;                   
     SectionId: number;                  
     S1Statement: string;                
     S2Statement: string;                    

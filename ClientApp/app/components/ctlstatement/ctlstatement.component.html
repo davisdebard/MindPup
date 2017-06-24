@@ -1,0 +1,18 @@
+﻿<!-- ============================================================ -->
+<!-- STATEMENT                                                    -->
+<!-- ============================================================ -->
+<div class="row pad-left" *ngIf="ctlCardStatus == 'Intro Statement'">
+  <div class="col-md-12">
+    <div id="statement-intro">
+      {{ ctlStatementIntro }}
+    </div>
+  </div>
+</div>
+<div class="row pad-left" *ngIf="ctlCardStatus == 'Review Statement'">
+  <div class="col-md-12">
+    <div id="statement-review">
+      {{ ctlStatementReview }}
+    </div>
+  </div>
+</div>
+

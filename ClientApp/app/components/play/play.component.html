@@ -13,8 +13,10 @@
       <span *ngIf="cardStatus != 'Complete' && !(cardType == 'Multiple Choice'
         && cardStatus == 'Play Question')">
 
-        <!-- GO Button -->
-        <button (click)="moveOn('button')"
+        <!-- ============================================================ -->
+        <!-- GO Button                                                    -->
+        <!-- ============================================================ -->
+        <button (click)="moveOn(answerGiven)"
                 class="btn btn-primary">
           <span class="glyphicon glyphicon-play"></span>
           &nbsp;Go
@@ -128,20 +130,10 @@
 <!-- ============================================================ -->
 <!-- STATEMENT                                                    -->
 <!-- ============================================================ -->
-<div class="row pad-left" *ngIf="cardStatus == 'Intro Statement'">
-  <div class="col-md-12">
-    <div id="statement-intro">
-      {{statementIntro}}
-    </div>
-  </div>
-</div>
-<div class="row pad-left" *ngIf="cardStatus == 'Review Statement'">
-  <div class="col-md-12">
-    <div id="statement-review">
-      {{statementReview}}
-    </div>
-  </div>
-</div>
+<ctl-statement [ctlCardStatus]="cardStatus"
+             [ctlStatementIntro]="statementIntro"
+             [ctlStatementReview]="statementReview">
+</ctl-statement>
 <!-- ============================================================ -->
 <!-- QUESTION                                                     -->
 <!-- ============================================================ -->
@@ -165,12 +157,42 @@
   </div>
 
   <div class="col-md-10" *ngIf="cardType == 'Fill In' ||
-                                            cardType == 'Fill In Swappable'">
-    <input #answerGiven type="text" id="AnswerGiven" required maxlength="1000" size="40" />
+                                cardType == 'Fill In Swappable'">
+    <input type="text" [(ngModel)]="answerGiven" required maxlength="1000" size="40"
+       [class.correct-input]   ="cardStatus == 'Seen Correct'"
+       [class.incorrect-input] ="cardStatus == 'Seen Incorrect'" />
   </div>
 </div>
 <!-- ============================================================ -->
-<!-- ANSWER:  Multiple Choice                              -->
+<!-- ANSWER: Fill-In Show Correct Answer                               -->
+<!-- ============================================================ -->
+<div class="row pad-left" *ngIf="(cardStatus == 'Seen Correct' ||
+                                 cardStatus == 'Seen Incorrect') &&
+                                (cardType == 'Fill In' ||
+                                 cardType == 'Fill In Swappable')">
+  <div class="col-md-2 green">
+    Correct answer:
+  </div>
+  <div class="col-md-10">
+    <span id="correctAnswer">
+      {{answer}}
+    </span>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- ANSWER: Fill-In                               -->
+<!-- ============================================================ -->
+<!--<ctl-fill-in [ctlAnswer]="answer"
+             [ctlCardType]="cardType"
+             [ctlCardStatus]="cardStatus"
+             (ctlAnswerText)="selectFillIn($event)">
+</ctl-fill-in>-->
+<!--<ctl-fill-in [ctlAnswer]="answer"
+             [ctlCardType]="cardType"
+             [ctlCardStatus]="cardStatus">
+</ctl-fill-in>-->
+<!-- ============================================================ -->
+<!-- ANSWER:  Multiple Choice                                     -->
 <!-- ============================================================ -->
 <mult-choice    [mcCardType]="cardType"
                 [mcAnswer]="answerLetter"
@@ -184,21 +206,7 @@
                 (mcChoice)="selectAnswer($event)">
 </mult-choice>
 
-<!-- ============================================================ -->
-<!-- ANSWER: Fill-In Correct Answer                               -->
-<!-- ============================================================ -->
-<div class="row pad-left" *ngIf="cardStatus == 'Seen Incorrect' &&
-                                (cardType == 'Fill In' ||
-                                 cardType == 'Fill In Swappable')">
-  <div class="col-md-2">
-    Correct answer:
-  </div>
-  <div class="col-md-10">
-    <span id="correctAnswer">
-      {{answer}}
-    </span>
-  </div>
-</div>
+
 <!-- ============================================================ -->
 <!-- Spacer                                                       -->
 <!-- ============================================================ -->
@@ -227,9 +235,9 @@
         &nbsp;{{cardStatus}}
       </span>
 
-      <label for="trailImage">trailImage:</label>
-      <span id="trailImage">
-        &nbsp;{{trailImage}}
+      <label for="cardType">Card Type:</label>
+      <span id="cardType">
+        &nbsp;{{cardType}}
       </span>
 
       <label for="testInfo">Test Info:</label>

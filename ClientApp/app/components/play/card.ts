@@ -1,4 +1,4 @@
-/********************************* 
+﻿/********************************* 
  CARD
  ====
  A "card" is information about one point being played.
@@ -78,13 +78,13 @@ export class Card {
     /* Answer #4, also incorrect, and alternate. */
     Q1Question: string;                 /* Point */
     /* The first question. */
-    Q1TypeId: number;                   /* Point */
+    Q1QuestionType: string;                   /* Point - QuestionType */
     /* The type of the first question. 
-        1   Multiple Choice     4 Alternatives - 1st correct, randomized in client
-        2   Fill In             Answer typed in. - 1st answer is the answer
-        3   Fill In Swappable   Same as fill in, but question and answer can be
+        MC  Multiple Choice     4 Alternatives - 1st correct, randomized in client
+        FI  Fill In             Answer typed in. - 1st answer is the answer
+        FS  Fill In Swappable   Same as fill in, but question and answer can be
                                 swapped in the client
-        4   True False          Like multiple choice, but with these choices:
+        TF  True False          Like multiple choice, but with these choices:
                                 a. True
                                 b. False
                                 c. Mostly True
@@ -100,7 +100,7 @@ export class Card {
     Q2Ans3Alt: string;                  /* Point */
     Q2Ans4Alt: string;                  /* Point */
     Q2Question: string;                 /* Point */
-    Q2TypeId: number;                   /* Point */
+    Q2QuestionType: string;             /* Point - QuestionType */
     Q3Ans1Act: string;                  /* Point */
     /* Question #3 is also exactly like Question #1.  It gets asked later in the 
        sequence if Question #1 was intitially answered incorrectly, and also
@@ -109,7 +109,7 @@ export class Card {
     Q3Ans3Alt: string;                  /* Point */
     Q3Ans4Alt: string;                  /* Point */
     Q3Question: string;                 /* Point */
-    Q3TypeId: number;                   /* Point */
+    Q3QuestionType: string;             /* Point - QuestionType */
     SectionId: number;                  /* Play Sections */
     /* The current SectionId.  Sections hold Points.
        All the different levels are recorded in Sections,

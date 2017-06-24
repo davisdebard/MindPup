@@ -1,0 +1,32 @@
+﻿<!-- ============================================================ -->
+<!-- ANSWER:  Fill In Answer Given                                -->
+<!-- ============================================================ -->
+<div class="row pad-left answer" *ngIf="(ctlCardStatus == 'Play Question' ||
+                                        ctlCardStatus == 'Seen Correct' ||
+                                        ctlCardStatus == 'Seen Incorrect') &&
+                                        (ctlCardType == 'Fill In' ||
+                                        ctlCardType == 'Fill In Swappable')">
+  <div class="col-md-2">
+    <label for="AnswerGiven">Answer:</label>
+  </div>
+
+  <div class="col-md-10" *ngIf="ctlCardType == 'Fill In' ||
+                                            ctlCardType == 'Fill In Swappable'">
+    <input [(ngModel)]="ctlAnswerGiven" (change)="enterFillIn" type="text" required maxlength="1000" size="40" />
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- ANSWER: Fill-In Correct Answer                               -->
+<!-- ============================================================ -->
+<div class="row pad-left" *ngIf="ctlCardStatus == 'Seen Incorrect' &&
+                                (ctlCardType == 'Fill In' ||
+                                 ctlCardType == 'Fill In Swappable')">
+  <div class="col-md-2">
+    Correct answer:
+  </div>
+  <div class="col-md-10">
+    <span id="correctAnswer">
+      {{ ctlAnswer }}
+    </span>
+  </div>
+</div>

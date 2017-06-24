@@ -37,9 +37,15 @@
     background-color: lightyellow;
     border-radius: 2px;
 }
+.correct-input {
+    background-color: lightyellow;
+}
 .incorrect-answer {
     border: 2px solid red;
     border-radius: 2px;
+}
+.incorrect-input {
+  background-color: lightsteelblue;
 }
 .other-answer {
     border: 1px solid black;

@@ -23,7 +23,9 @@ import { PointsComponent } from './components/points/points.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { TestingComponent } from './components/testing/testing.component';
 //import { globalvarsService } from './components/shared/globalvars.service';
+import { CtlFillInComponent } from './components/ctlfillin/ctlfillin.component';
 import { CtlMultChoiceComponent } from './components/ctlmultchoice/ctlmultchoice.component';
+import { CtlStatementComponent } from './components/ctlstatement/ctlstatement.component';
 import { MultChoiceComponent } from './components/multchoice/multchoice.component';
 
 
@@ -42,7 +44,9 @@ import { MultChoiceComponent } from './components/multchoice/multchoice.componen
         ,PointsComponent
         ,ContactComponent
         ,TestingComponent
+        ,CtlFillInComponent
         ,CtlMultChoiceComponent
+        ,CtlStatementComponent
         ,MultChoiceComponent
     ],
     imports: [

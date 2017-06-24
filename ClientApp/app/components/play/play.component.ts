@@ -1,4 +1,7 @@
-﻿import { Component, Directive, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿// NOTE:  Ctrl + M + O collapses all sections.
+//        Ctrl + M + L expands   all sections.
+
+import { Component, Directive, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgIf } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Card } from './card';
@@ -11,7 +14,9 @@ import { NgForm } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { CtlFillInComponent } from '../ctlfillin/ctlfillin.component';
 import { CtlMultChoiceComponent } from '../ctlmultchoice/ctlmultchoice.component';
+import { CtlStatementComponent } from '../ctlstatement/ctlstatement.component';
 import { MultChoiceComponent } from '../multchoice/multchoice.component';
     
 @NgModule({
@@ -75,19 +80,19 @@ export class PlayComponent implements OnInit {
     Q1Ans3Alt: string;
     Q1Ans4Alt: string;
     Q1Question: string;
-    Q1TypeId: number;
+    Q1QuestionType: string;
     Q2Ans1Act: string;
     Q2Ans2Alt: string;
     Q2Ans3Alt: string;
     Q2Ans4Alt: string;
     Q2Question: string;
-    Q2TypeId: number;
+    Q2QuestionType: string;
     Q3Ans1Act: string;
     Q3Ans2Alt: string;
     Q3Ans3Alt: string;
     Q3Ans4Alt: string;
     Q3Question: string;
-    Q3TypeId: number;
+    Q3QuestionType: string;
     SectionId: number;
     S1Statement: string;
     S2Statement: string;
@@ -177,8 +182,51 @@ export class PlayComponent implements OnInit {
         if (this.pointNoMax >= 9) this.cardArray[8].ToVerify = 1;
         return 1;
     }
-    // Calculate the next question to be asked.
+    // The next question number (i.e. #1, 2, or 3) determines the cardType for the question currently loaded.
+    calcCardType(nextQuestionNo: number): void
+    {
+        var qType = "";
+        // There are three question numbers in each point.
+        // This loads the card type of the currently identified question.
+        switch(nextQuestionNo)
+        {
+            case 1:
+                qType = this.Q1QuestionType;
+                break;
+            case 2:
+                qType = this.Q2QuestionType;
+                break;
+            case 3:
+                qType = this.Q3QuestionType;
+                break;
+            default:
+                qType = this.Q1QuestionType;
+                break;
+        }
+
+        // Question type is a two character code, which gets filled out here.
+        switch (qType) {
+            case "FI":
+                this.cardType = "Fill In";
+                break;
+            case "FS":
+                this.cardType = "Fill In Swappable";
+                break;
+            case "MC":
+                this.cardType = "Multiple Choice";
+                break;
+            case "TF":
+                this.cardType = "True False";
+                break;
+            default:
+                this.cardType = "Multiple Choice";
+                break;
+        }
+        this.testInfo = "calcCardType = " + this.cardType;
+    }
+    // Calculate the next question (i.e. #1, 2 or 3) to be asked.
     calcNextQuestion(isReview: number): number {
+ 
         // Expect the point to have been loaded.
         var nextQuestion = 0;
         // If there are no questions (possible), then return 0.
@@ -229,6 +277,8 @@ export class PlayComponent implements OnInit {
         }
 
         // Load data pertinent to nextQuestion.
+        this.calcCardType(nextQuestion);
+
         switch (nextQuestion) {
             case 0:
                 this.hasQuestions = 0;
@@ -237,6 +287,7 @@ export class PlayComponent implements OnInit {
                 this.ans2Alt = "";
                 this.ans3Alt = "";
                 this.question = "";
+                this.cardType = "";
                 break;
             case 1:
                 this.hasQuestions = 1;
@@ -434,19 +485,19 @@ export class PlayComponent implements OnInit {
             card.Q1Ans3Alt = "";
             card.Q1Ans4Alt = "";
             card.Q1Question = "";
-            card.Q1TypeId = 0;
+            card.Q1QuestionType = "";
             card.Q2Ans1Act = "";
             card.Q2Ans2Alt = "";
             card.Q2Ans3Alt = "";
             card.Q2Ans4Alt = "";
             card.Q2Question = "";
-            card.Q2TypeId = 0;
+            card.Q2QuestionType = "";
             card.Q3Ans1Act = "";
             card.Q3Ans2Alt = "";
             card.Q3Ans3Alt = "";
             card.Q3Ans4Alt = "";
             card.Q3Question = "";
-            card.Q3TypeId = 0;
+            card.Q3QuestionType = "";
             card.SectionId = 0;
             card.S1Statement = "";
             card.S2Statement = "";
@@ -476,19 +527,19 @@ export class PlayComponent implements OnInit {
         this.Q1Ans3Alt = "";
         this.Q1Ans4Alt = "";
         this.Q1Question = "";
-        this.Q1TypeId = 0;
+        this.Q1QuestionType = "";
         this.Q2Ans1Act = "";
         this.Q2Ans2Alt = "";
         this.Q2Ans3Alt = "";
         this.Q2Ans4Alt = "";
         this.Q2Question = "";
-        this.Q2TypeId = 0;
+        this.Q2QuestionType = "";
         this.Q3Ans1Act = "";
         this.Q3Ans2Alt = "";
         this.Q3Ans3Alt = "";
         this.Q3Ans4Alt = "";
         this.Q3Question = "";
-        this.Q3TypeId = 0;
+        this.Q3QuestionType = "";
         this.SectionId = 0;
         this.S1Statement = "";
         this.S2Statement = "";
@@ -650,19 +701,19 @@ export class PlayComponent implements OnInit {
                 card.Q1Ans3Alt = this.cards[i].Q1Ans3Alt;
                 card.Q1Ans4Alt = this.cards[i].Q1Ans4Alt;
                 card.Q1Question = this.cards[i].Q1Question;
-                card.Q1TypeId = this.cards[i].Q1TypeId;
+                card.Q1QuestionType = this.cards[i].Q1QuestionType;
                 card.Q2Ans1Act = this.cards[i].Q2Ans1Act;
                 card.Q2Ans2Alt = this.cards[i].Q2Ans2Alt;
                 card.Q2Ans3Alt = this.cards[i].Q2Ans3Alt;
                 card.Q2Ans4Alt = this.cards[i].Q2Ans4Alt;
                 card.Q2Question = this.cards[i].Q2Question;
-                card.Q2TypeId = this.cards[i].Q2TypeId;
+                card.Q2QuestionType = this.cards[i].Q2QuestionType;
                 card.Q3Ans1Act = this.cards[i].Q3Ans1Act;
                 card.Q3Ans2Alt = this.cards[i].Q3Ans2Alt;
                 card.Q3Ans3Alt = this.cards[i].Q3Ans3Alt;
                 card.Q3Ans4Alt = this.cards[i].Q3Ans4Alt;
                 card.Q3Question = this.cards[i].Q3Question;
-                card.Q3TypeId = this.cards[i].Q3TypeId;
+                card.Q3QuestionType = this.cards[i].Q3QuestionType;
                 card.SectionId = this.cards[i].SectionId;
                 card.S1Statement = this.cards[i].S1Statement;
                 card.S2Statement = this.cards[i].S2Statement;
@@ -838,19 +889,19 @@ export class PlayComponent implements OnInit {
         this.Q1Ans3Alt = this.cardArray[arrayPoint].Q1Ans3Alt;
         this.Q1Ans4Alt = this.cardArray[arrayPoint].Q1Ans4Alt;
         this.Q1Question = this.cardArray[arrayPoint].Q1Question;
-        this.Q1TypeId = this.cardArray[arrayPoint].Q1TypeId;
+        this.Q1QuestionType = this.cardArray[arrayPoint].Q1QuestionType;
         this.Q2Ans1Act = this.cardArray[arrayPoint].Q2Ans1Act;
         this.Q2Ans2Alt = this.cardArray[arrayPoint].Q2Ans2Alt;
         this.Q2Ans3Alt = this.cardArray[arrayPoint].Q2Ans3Alt;
         this.Q2Ans4Alt = this.cardArray[arrayPoint].Q2Ans4Alt;
         this.Q2Question = this.cardArray[arrayPoint].Q2Question;
-        this.Q2TypeId = this.cardArray[arrayPoint].Q2TypeId;
+        this.Q2QuestionType = this.cardArray[arrayPoint].Q2QuestionType;
         this.Q3Ans1Act = this.cardArray[arrayPoint].Q3Ans1Act;
         this.Q3Ans2Alt = this.cardArray[arrayPoint].Q3Ans2Alt;
         this.Q3Ans3Alt = this.cardArray[arrayPoint].Q3Ans3Alt;
         this.Q3Ans4Alt = this.cardArray[arrayPoint].Q3Ans4Alt;
         this.Q3Question = this.cardArray[arrayPoint].Q3Question;
-        this.Q3TypeId = this.cardArray[arrayPoint].Q3TypeId;
+        this.Q3QuestionType = this.cardArray[arrayPoint].Q3QuestionType;
         this.Score = this.cardArray[arrayPoint].Score;
         this.ScoreVerify = this.cardArray[arrayPoint].ScoreVerify;
         this.SectionId = this.cardArray[arrayPoint].SectionId;
@@ -872,11 +923,12 @@ export class PlayComponent implements OnInit {
             this.cardStatus = "Play Question";
         }
 
+        this.testInfo = "card type =" + this.cardType;
+
         this.answerGiven = "";
         this.answerGivenLetter = "";
         this.answerLetter = "A";
         this.award = "";
-        this.cardType = "Multiple Choice";
         this.progressPct = 0;
         this.sectionImprovePct = 0;
         this.statementIntro = this.S1Statement; // This is only shown once, and is always S1.
@@ -889,7 +941,7 @@ export class PlayComponent implements OnInit {
         var trailNo = this.randomIntFromInterval(1, 9);
         this.trailImage = "images/trail-00" + trailNo + ".png";
      }
-    // Change the card status based on the action just taken.
+    // Change the card status based on the action just taken. Also evaluates Fill In type answers.
     moveOn(): void {
 
         switch (this.cardStatus) {
@@ -902,12 +954,16 @@ export class PlayComponent implements OnInit {
             case 'Intro Statement':
                 if (this.hasQuestions == 1) {
                     this.cardStatus = "Play Question";
-                    this.cardType = "Multiple Choice";   // Temporary.
                 } else {
                     this.loadNextPoint();
                 }
                 break;
             case 'Play Question':
+                if (this.cardType == "Fill In" || this.cardType == "Fill In Swappable")
+                {
+                    this.selectFillIn(this.answerGiven);
+                }
+
                 this.answerGivenLetter = "";
                 break;
             case 'Seen Correct':
@@ -938,26 +994,6 @@ export class PlayComponent implements OnInit {
         this.loadTrail();
     }
     // Set up, but not currently used.
-    onCardTypeChange(): void {
-        // Not currently used.
-        switch (this.cardTypeNo) {
-            case 0:
-                this.cardType = "Fill In";
-                break;
-            case 1:
-                this.cardType = "Multiple Choice";
-                break;
-            case 2:
-                this.cardType = "Fill In";
-                break;
-            case 3:
-                this.cardType = "Fill In Swappable";
-                break;
-            case 4:
-                this.cardType = "True False";
-                break;
-        };
-    }
     // Resets everything, to start over.
     onRestart(): void {
         // Restarts from the beginning, for convenience.
@@ -996,59 +1032,12 @@ export class PlayComponent implements OnInit {
             this.onSectionComplete();
         }
     }
-    // Want to move this to Utilities.
-    randomIntFromInterval(min, max): number {
-        // Get a random number between min and max.
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-    // Score a 10set which may be the same as or less than a section.
-    score10Set(): number {
-        // Score a 10set, or as much as we have in memory
-        // after completing the "Play" phase, before entering the "Verify" phase.
-        var i = 0;
-        this.tenSetAsked = 0;
-        this.tenSetCorrect = 0;
-
-        for (let card of this.cardArray) {
-            this.tenSetAsked++;
-            if (this.cardArray[i].IsCorrect == 1) {
-                this.tenSetCorrect++;
-            }
-            i++;
-        }
-
-        return +(((100 * this.tenSetCorrect) / this.tenSetAsked).toFixed(0));
-    }
-    // Score a section, which may be the same as or more than a 10set.
-    scoreSection(): number {
-        // Score and prepare a section.
-        // Run when "Complete" status reached.
-        var i = 0;
-        var secScore = 0;
-        var totalCorrect = 0;
-        var totalPointsPlayed = 0;
-
-        for (let card of this.cardArray) {
-            totalPointsPlayed++;
-            if (this.cardArray[i].IsCorrect == 1) {
-                totalCorrect++;
-            }
-            i++;
-        }
-
-        if (totalPointsPlayed > 0) {
-            secScore = +(((100 * totalCorrect) / totalPointsPlayed).toFixed(0));
-        }
-        return secScore;
-    }
-    // Chooses A, B, C or D in multiple choice.
-    selectAnswer(ansLetter): void {
+    // Called by selectAnswer() or selectFillIn().
+    processAnswer(isCorrect): void {
         // Don't process unless playing a question.
-        if (this.cardStatus != "Play Question")
-        {
+        if (this.cardStatus != "Play Question") {
             return;
         }
-        console.log('Answer selected is ', ansLetter);
 
         // Process after an answer is selected. 
         if (this.phase == "Play") {
@@ -1058,32 +1047,17 @@ export class PlayComponent implements OnInit {
             this.CountAskedVerify++;
         }
 
-        switch (ansLetter) {
-            case 'A':
-                this.answerGivenLetter = 'A';
+        if (isCorrect == true) {
+            this.cardStatus = "Seen Correct";
+            if (this.phase == "Play") {
+                this.CountRight++;
+            }
+            else {
+                this.CountRightVerify++;
+            }
 
-                // For now, for simplicity, set 'A' as the correct answer all the time.
-                this.cardStatus = "Seen Correct";
-
-                if (this.phase == "Play") {
-                    this.CountRight++;
-                }
-                else {
-                    this.CountRightVerify++;
-                }
-                break;
-            case 'B':
-                this.answerGivenLetter = 'B';
-                this.cardStatus = "Seen Incorrect";
-                break;
-            case 'C':
-                this.answerGivenLetter = 'C';
-                this.cardStatus = "Seen Incorrect";
-                break;
-            case 'D':
-                this.answerGivenLetter = 'D';
-                this.cardStatus = "Seen Incorrect";
-                break;
+        } else {
+            this.cardStatus = "Seen Incorrect";
         }
 
         if (this.phase == "Play") {
@@ -1137,6 +1111,100 @@ export class PlayComponent implements OnInit {
         this.cardArray[this.pointNoArray].IsVerified = this.IsVerified;
         this.cardArray[this.pointNoArray].Score = this.Score;
         this.cardArray[this.pointNoArray].ScoreVerify = this.ScoreVerify;
+    }
+    // Want to move this to Utilities.
+    randomIntFromInterval(min, max): number {
+        // Get a random number between min and max.
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    // Score a 10set which may be the same as or less than a section.
+    score10Set(): number {
+        // Score a 10set, or as much as we have in memory
+        // after completing the "Play" phase, before entering the "Verify" phase.
+        var i = 0;
+        this.tenSetAsked = 0;
+        this.tenSetCorrect = 0;
+
+        for (let card of this.cardArray) {
+            this.tenSetAsked++;
+            if (this.cardArray[i].IsCorrect == 1) {
+                this.tenSetCorrect++;
+            }
+            i++;
+        }
+
+        return +(((100 * this.tenSetCorrect) / this.tenSetAsked).toFixed(0));
+    }
+    // Score a section, which may be the same as or more than a 10set.
+    scoreSection(): number {
+        // Score and prepare a section.
+        // Run when "Complete" status reached.
+        var i = 0;
+        var secScore = 0;
+        var totalCorrect = 0;
+        var totalPointsPlayed = 0;
+
+        for (let card of this.cardArray) {
+            totalPointsPlayed++;
+            if (this.cardArray[i].IsCorrect == 1) {
+                totalCorrect++;
+            }
+            i++;
+        }
+
+        if (totalPointsPlayed > 0) {
+            secScore = +(((100 * totalCorrect) / totalPointsPlayed).toFixed(0));
+        }
+        return secScore;
+    }
+    // Chooses A, B, C or D in multiple choice.
+    selectAnswer(ansLetter): void {
+        // Don't process unless playing a question.
+        if (this.cardStatus != "Play Question")
+        {
+            return;
+        }
+
+        var isCorrect = 0;
+
+        switch (ansLetter) {
+            case 'A':
+                // For now, for simplicity, set 'A' as the correct answer all the time.
+                isCorrect = 1;
+
+                this.answerGivenLetter = 'A';
+                break;
+            case 'B':
+                this.answerGivenLetter = 'B';
+                break;
+            case 'C':
+                this.answerGivenLetter = 'C';
+                break;
+            case 'D':
+                this.answerGivenLetter = 'D';
+                break;
+        }
+
+        this.processAnswer(isCorrect);
+    }
+    // Called by moveOn() when using a fill in question type.
+    selectFillIn(fillInAnswer: string): void {
+        // Don't process unless playing a question.
+        if (this.cardStatus != "Play Question") {
+            return;
+        }
+        console.log('Answer entered is ', fillInAnswer);
+        var isCorrect = 0;
+
+        // TO DO: Make this more sophisticated. Compare after removing spaces, discounting capitalization.
+        if (fillInAnswer == this.answer)
+        {
+            isCorrect = 1;
+        }
+
+        this.testInfo = fillInAnswer + " -- " + this.answer;
+
+        this.processAnswer(isCorrect);
     }
 }  // End PlayComponent
 
